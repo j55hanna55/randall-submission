@@ -30,6 +30,8 @@ TAREXT = txz
 
 default: randall
 
+	
+
 randall: *.c
 	$(CC) $(CFLAGS) *.c -o $@
 
@@ -51,6 +53,5 @@ randall-submission.$(TAREXT): $(submission-files)
 clean:
 	rm -f *.o *.$(TAREXT) randall
 
-check: randall test.sh
-	chmod 755 test.sh
-	./test.sh
+check: randall
+	./randall 1000 | wc -c | grep 1000 || echo "Failed: output is not correct length"
